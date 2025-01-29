@@ -144,7 +144,7 @@
             {
                 customIcon=icon_n[2]
             }
-            else if (point.tipo=='secundário')
+            else if (point.tipo=='colónia')
             {
                 customIcon=icon_n[3]
             }
@@ -152,11 +152,18 @@
             {
                 customIcon=icon_n[0]
             }
-            console.log(point.lat, point.lng)
+            //console.log(point.lat, point.lng)
+            if (point.tipo=="")
+            { point.tipo="Não especificado"
+
+            }    
 
             L.marker([point.lat, point.lng], { icon: customIcon })
                 .addTo(map)
-                .bindPopup(`<font=montserrat><strong>ID: ${point.name}</strong>` + `<br>(${point.lat.toFixed(5)},${point.lng.toFixed(5)})` + `<br>tipo: ${point.tipo}<br>endereço:${point.address};<br> suporte:${point.suporte} - altura:${point.altura} - tamanho:${point.tamanho} <br>contacto:${point.reportado}/${point.contacto}<br><iframe src="{{ url_for('static', filename='./images/vespaasiatica_s.jpg') }}" style='width:100%; aspect-ratio: 16 / 9;width:300px;' allow="autoplay" title='${point.foto}'></iframe><br><small><i>Foto ilustrativa - todos os outros dados são reais.`);
+                .bindPopup(`<font=montserrat><strong>ID: ${point.name}</strong>` + ` (${point.lat.toFixed(5)},${point.lng.toFixed(5)})` + ` | tipo: ${point.tipo} <br>endereço:${point.address};<br> suporte:${point.suporte} - altura:${point.altura} - tamanho:${point.tamanho} <br>contacto:${point.reportado} / ${point.contacto}<br><iframe src="{{ url_for('static', filename='./images/vespaasiatica_s.jpg') }}" style='width:100%; aspect-ratio: 16 / 9;width:300px;' allow="autoplay" title='${point.foto}'></iframe><br><i>Foto ilustrativa - todos os outros dados são reais.<hr color=lime><small>Dados extraídos de <a href='https://docs.google.com/spreadsheets/d/1g70Tsb-nQpxrZCuCoTz-fnM01IA8u6x_cVuRx7h7e5k/edit?gid=615971746#gid=615971746' target='*'>NINHOS MAIA_REL_ACUMULADO_OFF_VER ANALISES</a> em ${point.tstamp}.`, {
+                     maxWidth: 500,  // Maximum width in pixels
+                     minWidth: 350   // Minimum width in pixels
+                });
 
                 //alert(point.foto)
                 console.log(point.foto)

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import json
 import openpyxl
+import datetime
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"  # Required for session management
@@ -101,7 +102,9 @@ def map():
     print("Data:--------------------------------------------------------")
     print(data)
     ns=0
-    for l in data:
+     
+    for l in data:  
+        agora = str(datetime.datetime.now())[0:16]
         if (ns>0) and l[0]!=None:
             print(f"NS: {ns}:",l[0], l[1]+ l[2])
             if l[0]!="":
@@ -118,14 +121,14 @@ def map():
                     fotourl=l[3].replace('?usp=drive_link', '')
     
                 fotourl=fotourl.replace('/view', '/preview')
-                print(fotourl)
+                #print(fotourl)
                 if fotourl=="":
                     fotourl='images/vespaasiatica.jpg'
                 fotourl='./images/vespaasiatica.jpg'
 
                 points.append( {"name": nome, "lat": latitude, "lng": longitude, 'foto':fotourl, 'tipo':l[10], 'id':l[0],
                     'address':l[3], 'suporte':l[5], 'altura':l[8], 'tamanho':l[9], 'reportado':l[11], 'contacto':l[12], 
-                    'reportado':l[11] })
+                    'reportado':l[11], 'tstamp':agora })
                 ns=ns+1
 
             else:
