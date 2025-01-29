@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="it">
+<LINK REL="SHORTCUT ICON" HREF="/static/images/vespaasiatica.jpg" type="image/x-icon">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vespa V CMM</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login para aceder aos dados</h1>
+        <form method="POST" action="/">
+            <label for="keyword">Digite a chave:</label>
+            <input type="password" id="keyword" name="keyword" style='width:90%' required>
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+            <button type="submit">Login</button>
+        </form>
+    </div>
+<hr color=lime>
+&copy; Vespa V CMMaia, 2025
+</body>
+</html>
