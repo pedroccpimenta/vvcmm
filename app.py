@@ -128,7 +128,7 @@ def map():
 
                 points.append( {"name": nome, "lat": latitude, "lng": longitude, 'foto':fotourl, 'tipo':l[10], 'id':l[0],
                     'address':l[3], 'suporte':l[5], 'altura':l[8], 'tamanho':l[9], 'reportado':l[11], 'contacto':l[12], 
-                    'reportado':l[11], 'tstamp':agora })
+                    'reportado':l[11], 'tstamp':agora, 'notifica':l[14], 'interv':l[16], 'método':l[18] })
                 ns=ns+1
 
             else:
