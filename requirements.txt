@@ -1,0 +1,12 @@
+
+flask
+#gunicorn==20.1.0
+
+datetime
+pygsheets
+
+pandas
+requests
+
+openpyxl
+ 

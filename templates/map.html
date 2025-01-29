@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="it" translate='no'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <LINK REL="SHORTCUT ICON" HREF="/static/images/vespaasiatica.jpg" type="image/x-icon">
+    
+    <title>Vespa V CMM</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="/static/style.css" />
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body style="font-family: montserrat;">
+
+       <table border=1 cellspacing="0" width='100%'><tr><td> 
+    <h1>Vespa Velutina @ CMMaia</h1>
+    <td style="width:120px" align=center>
+        <form action="/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
+</td>
+
+<tr><td colspan="2" align=center> 
+   <table border=0 cellspacing="0" style='width:100%'><tr>
+        <td style='width:30%'>
+
+            <!-- <input type=button onclick="gog(polygon)" value='on/off'> -->
+
+            <ul translate="no">
+                <li> <img src="{{ url_for('static', filename='images/NP.PNG') }}"  width=26> - ninho primário
+                <li> <img src="{{ url_for('static', filename='images/NS.PNG') }}"  width=26> - ninho secundário
+                <li> <img src="{{ url_for('static', filename='images/C.PNG') }}"  width=26> - colónia 
+                <li> <img src="{{ url_for('static', filename='images/D.PNG') }}"  width=26> - Sem classificação
+            </ul>
+
+        <div id='tstalle' translate='no'></div>
+    
+    <td style='width:70%;'>
+    <div id="map"></div>
+
+    </table>
+</table>
+    <script>
+
+    function gog(x)
+    {
+        if (map.hasLayer(x)) {
+            console.log("The polygon is visible on the map.");
+            hideObject(x)
+        } else {
+            console.log("The polygon is hidden from the map.");
+            showObject(x)
+        }
+    }
+
+
+        function hideObject(x) {
+            map.removeLayer(x); // Removes the polygon from the map
+        }
+
+        function showObject(x) {
+            x.addTo(map); // Re-adds the polygon to the map
+        }
+
+        // Initialize the map
+        const map = L.map('map').setView([41.237, -8.627], 11.5);  
+
+
+        // This has to be moved to srver side.
+        // restricted to CMMaia
+        mapboxAccessToken = 'pk.eyJ1IjoicGVkcm9jY3BpbWVudGEiLCJhIjoiY2tqYjl4Z241Mzl4ZDJ6bGdjNjJ3ODRveSJ9.hu3b-A7Hx7SuJR73jPNAbw';
+
+        // Unrestricted
+        mapboxAccessToken = 'pk.eyJ1IjoicGVkcm9jY3BpbWVudGEiLCJhIjoiY2xrdmN1NDdwMGY3cTNjbGFnbW84N3pvYSJ9.1ZKt7NXzv9qgmQUdBGHPMQ';
+
+        // Maptiles access token
+        // restricted to CMMaia
+        mapTilerToken = "JrNxpTYvZI4dumOPXQTo";
+        // Unrestricted
+        mapTilerToken = "FQ2W5OvSvBOpwkHoUpih";
+
+        var tiles='mb11';
+        tiles='mts2';
+        // tiles='mto';
+        
+
+        if (tiles=='mb11')
+        {
+            // Add the Mapbox tile layer
+
+            L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=${mapboxAccessToken}`, {  tileSize: 512,  zoomOffset: -1,  attribution: '© <a href="https://www.mapbox.com/">Mapbox</a> contributors', maxZoom: 18, }).addTo(map);
+        }
+        else if (tiles=='mts2')
+        {
+            L.tileLayer(`https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=${mapTilerToken}`, { 
+                tileSize: 512,  zoomOffset: -1,
+                attribution: '© <a href="https://www.maptiler.com/">Maptiler</a> contributors', maxZoom: 18, }).addTo(map);
+        }
+        
+        else if (tiles=='mto')
+        {
+            L.tileLayer(`https://api.maptiler.com/tiles/contours-v2/{z}/{x}/{y}.pbf?key=${mapTilerToken}`, { 
+                tileSize: 512,  zoomOffset: -1,
+                attribution: '© <a href="https://www.maptiler.com/">Maptiler</a> contributors', maxZoom: 18, }).addTo(map);
+        }
+        else
+        {
+            L.tileLayer(`https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=${mapTilerToken}`, { 
+                tileSize: 512,  zoomOffset: -1,
+                attribution: '© <a href="https://www.maptiler.com/">Maptiler</a> contributors', maxZoom: 18, }).addTo(map);
+        }
+
+
+        var icon_n=[]
+
+        icon_n.push(
+          L.icon({
+            // iconUrl: './static/images/ruderi.png', // Path to your PNG file
+            // iconUrl: "https://drive.google.com/thumbnail?id=1VWOxZprIMP0Dy-0hKnUYDG_qwItZBMEj", // Path to your PNG file
+            iconUrl: './static/images/D.PNG', // Path to your PNG file
+
+            iconSize: [32, 32], // Size of the icon (adjust as needed)
+            iconAnchor: [16, 32], // Point of the icon that will be anchored to the marker's latitude/longitude
+            popupAnchor: [0, -32] // Position of the popup relative to the icon
+             }) )
+
+    icon_n.push( L.icon({ iconUrl: './static/images/NP.PNG', iconSize:[32, 32], iconAnchor:[16, 32], popupAnchor:[0, -32] }))
+    icon_n.push( L.icon({ iconUrl: './static/images/NS.PNG', iconSize:[32, 32], iconAnchor:[16, 32], popupAnchor:[0, -32] }))
+    icon_n.push( L.icon({ iconUrl: './static/images/C.PNG', iconSize:[32, 32], iconAnchor:[16, 32], popupAnchor:[0, -32] }))
+
+
+        points = {{ points|tojson }};
+        var ntp = points.length
+        document.getElementById('tstalle').innerHTML=`Total&nbsp;de&nbsp;${ntp} ocurrências.`
+        var np=0
+        points.forEach(point => {
+            np++
+            if (point.tipo=='primário')
+            {
+                customIcon=icon_n[1]
+            }
+            else if (point.tipo=='secundário')
+            {
+                customIcon=icon_n[2]
+            }
+            else if (point.tipo=='secundário')
+            {
+                customIcon=icon_n[3]
+            }
+            else
+            {
+                customIcon=icon_n[0]
+            }
+            console.log(point.lat, point.lng)
+
+            L.marker([point.lat, point.lng], { icon: customIcon })
+                .addTo(map)
+                .bindPopup(`<font=montserrat><strong>ID: ${point.name}</strong>` + `<br>(${point.lat.toFixed(5)},${point.lng.toFixed(5)})` + `<br>tipo: ${point.tipo}<br>endereço:${point.address};<br> suporte:${point.suporte} - altura:${point.altura} - tamanho:${point.tamanho} <br>contacto:${point.reportado}/${point.contacto}<br><iframe src="{{ url_for('static', filename='./images/vespaasiatica_s.jpg') }}" style='width:100%; aspect-ratio: 16 / 9;width:300px;' allow="autoplay" title='${point.foto}'></iframe><br><small><i>Foto ilustrativa - todos os outros dados são reais.`);
+
+                //alert(point.foto)
+                console.log(point.foto)
+        });
+
+
+          // Define a polygon with coordinates
+        polygonCoordinates = [
+            [ 46, 12],  
+            [ 46, 14],  
+            [ 47, 14], 
+            [ 47, 12],  
+            [ 46, 12]  
+        ];
+
+        poly={{ polys | tojson }}
+        
+        // Add the polygon to the map
+        const polygon = L.polygon(poly, {
+            color: 'blue',      // Outline color
+            fillColor: 'lightblue', // Fill color
+            fillOpacity: 0.5    // Transparency of the fill
+        }).addTo(map);
+
+        // Bind a popup to the polygon
+        polygon.bindPopup("This is a polygon area.");
+
+        // Adjust the map view to fit the polygon
+        // map.fitBounds(polygon.getBounds());
+
+    </script>
+
+<hr color=lime>
+&copy; Vespa V CMMaia, 2025
+</body>
+</html>
