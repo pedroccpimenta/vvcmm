@@ -19,6 +19,6 @@ The code for a flask application is maintained in this repository [Vespa Velutin
 ![screenshot2](./pics/screencapture-vvcmm-onrender-map-2025-01-29-15_35_07.png)
 
 
-![screenshot3](./pics/screencapture-vvcmm-onrender-map-2025-01-29-15_35_20.png)
+![screenshot3](./pics/screencapture-vvcmm-onrender-map-2025-01-29-17_10_35.png)
 
 PP, January 2025
