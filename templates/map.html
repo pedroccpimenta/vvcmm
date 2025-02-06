@@ -26,12 +26,20 @@
         <td style='width:30%'>
 
             <!-- <input type=button onclick="gog(polygon)" value='on/off'> -->
-
+            <!--
             <ul translate="no">
                 <li> <img src="{{ url_for('static', filename='images/NP.PNG') }}"  width=26> - ninho primário
                 <li> <img src="{{ url_for('static', filename='images/NS.PNG') }}"  width=26> - ninho secundário
                 <li> <img src="{{ url_for('static', filename='images/C.PNG') }}"  width=26> - colónia 
                 <li> <img src="{{ url_for('static', filename='images/D.PNG') }}"  width=26> - sem classificação
+            </ul>
+
+        -->
+            <ul translate="no">
+                <li> <img src="https://drive.google.com/thumbnail?id=1BxPlf7aTXeqs4ckzqiBlbk2NxntgGNvO"  width=26> - ninho primário
+                <li> <img src="https://drive.google.com/thumbnail?id=1f6Ed_TShgGBqwQdRbttNUI4twYaEyvmq"  width=26> - ninho secundário
+                <li> <img src="https://drive.google.com/thumbnail?id=1cH_yMz07iq5D1MNSgSidMc97Yh_9EeN_"  width=26> - colónia 
+                <li> <img src="https://drive.google.com/thumbnail?id=1Nae7UsVcBDfn6aMZFlxPapnE6Lx31eSJ"  width=26> - sem classificação
             </ul>
 
         <div id='tstalle' translate='no'></div>
@@ -116,20 +124,25 @@
 
         icon_n.push(
           L.icon({
-            // iconUrl: './static/images/ruderi.png', // Path to your PNG file
-            // iconUrl: "https://drive.google.com/thumbnail?id=1VWOxZprIMP0Dy-0hKnUYDG_qwItZBMEj", // Path to your PNG file
-            iconUrl: './static/images/D.PNG', // Path to your PNG file
+            // iconUrl: './static/images/D.PNG', // Path to your PNG file
+            iconUrl: 'https://drive.google.com/thumbnail?id=1Nae7UsVcBDfn6aMZFlxPapnE6Lx31eSJ', // Path to your PNG file
 
             iconSize: [32, 32], // Size of the icon (adjust as needed)
             iconAnchor: [16, 32], // Point of the icon that will be anchored to the marker's latitude/longitude
             popupAnchor: [0, -32] // Position of the popup relative to the icon
              }) )
 
+    /* "Local" files    
     icon_n.push( L.icon({ iconUrl: './static/images/NP.PNG', iconSize:[32, 32], iconAnchor:[16, 32], popupAnchor:[0, -32] }))
     icon_n.push( L.icon({ iconUrl: './static/images/NS.PNG', iconSize:[32, 32], iconAnchor:[16, 32], popupAnchor:[0, -32] }))
     icon_n.push( L.icon({ iconUrl: './static/images/C.PNG', iconSize:[32, 32], iconAnchor:[16, 32], popupAnchor:[0, -32] }))
+    */
 
-
+    /* Files located at https://drive.google.com/drive/folders/1AyJvswoiTqO7nm1odWpaAh85K26g6daO?usp=drive_link */
+    icon_n.push( L.icon({ iconUrl: 'https://drive.google.com/thumbnail?id=1BxPlf7aTXeqs4ckzqiBlbk2NxntgGNvO', iconSize:[32, 32], iconAnchor:[16, 32], popupAnchor:[0, -32] }))
+    icon_n.push( L.icon({ iconUrl: 'https://drive.google.com/thumbnail?id=1f6Ed_TShgGBqwQdRbttNUI4twYaEyvmq', iconSize:[32, 32], iconAnchor:[16, 32], popupAnchor:[0, -32] }))
+    icon_n.push( L.icon({ iconUrl: 'https://drive.google.com/thumbnail?id=1cH_yMz07iq5D1MNSgSidMc97Yh_9EeN_', iconSize:[32, 32], iconAnchor:[16, 32], popupAnchor:[0, -32] }))
+        
         points = {{ points|tojson }};
         var ntp = points.length
         document.getElementById('tstalle').innerHTML=`Total&nbsp;de&nbsp;${ntp} ocurrências.`

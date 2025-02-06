@@ -4,7 +4,7 @@ import openpyxl
 import datetime
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key"  # Required for session management
+#app.secret_key = "your_secret_key"  # Required for session management
 
 # Hardcoded login credentials
 
