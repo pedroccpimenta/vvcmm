@@ -4,7 +4,7 @@ import openpyxl
 import datetime
 
 app = Flask(__name__)
-#app.secret_key = "your_secret_key"  # Required for session management
+app.secret_key = "your_secret_key"  # Required for session management
 
 # Hardcoded login credentials
 
@@ -22,14 +22,12 @@ if (hostname=="DESKTOP-O5TUSN4") :
 
     #servfile='./etc/secrets/knot-433216-030beb26e003.json'
 else:
-    servfile='/etc/secrets/staleciurlac-efa9f27b99af.json'
     servfile='/etc/secrets/d4maia-gcells2mysql-062d106bc40f.json'
     othu='http://127.0.0.1:5000/'
     with open('/etc/secrets/vvcm_key.json', 'r') as fh:
         LOGIN_KEYWORD = json.loads(fh.read())['key']
 
 print ('LOGIN_KEYWORD', LOGIN_KEYWORD)
-
 
 """
 Logbook: https://docs.google.com/document/d/1RIQ4LQFTd3fj13Boa7eXlJf1Krh9P9gpjHwVfd84eAs
